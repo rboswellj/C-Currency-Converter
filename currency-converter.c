@@ -5,8 +5,11 @@ currency-converter.c
 03/14/2024
 A program that converts an amount from dollars to 6 other currencies based on user input.
 
-Could probably have completed this with fewer constants by calculating the other rates 
-relative to USD rates but decided to hardcode all rates.
+TODO:
+Because of the large numbers when converting to rupees and yen
+the columns break down if the base amount is more than 5 digits.
+I don't really have a clear solution for that other than limiting imput size
+or converting to scientific notation / rounding to the millions/billions/etc and adding a suffix.
 */
 
 #include <stdio.h>
@@ -14,7 +17,7 @@ relative to USD rates but decided to hardcode all rates.
 void print_table_header() 
 {
     char currency_name[7][6] = {"USD", "Euros", "Rupee", "Yen", "AD", "CD", "Swiss"};
-    printf("%-12s | %-12s | %-12s | %-12s | %-12s | %-12s | %-12s | %-12s\n", 
+    printf("%-6s | %-12s | %-12s | %-12s | %-12s | %-12s | %-12s | %-12s\n", 
            "", currency_name[0], currency_name[1], currency_name[2], 
            currency_name[3], currency_name[4], currency_name[5], currency_name[6]);
     printf("---------------------------------------------------------------------------------------------------------------\n");
@@ -23,7 +26,7 @@ void print_table_header()
 void print_conversion_row(const char* currency_name, float usd, float eur, float ind, 
        float jpy, float aud, float cad, float chf) 
 {
-    printf("%-12s | %-12.4f | %-12.4f | %-12.4f | %-12.4f | %-12.4f | %-12.4f | %-12.4f\n",
+    printf("%-6s | %-12.3f | %-12.3f | %-12.3f | %-12.3f | %-12.3f | %-12.3f | %-12.3f\n",
            currency_name, usd, eur, ind, jpy, aud, cad, chf);
     printf("---------------------------------------------------------------------------------------------------------------\n");
 }
