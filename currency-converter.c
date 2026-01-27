@@ -31,8 +31,7 @@ void print_conversion_row(const char* currency_name, float usd, float eur, float
     printf("---------------------------------------------------------------------------------------------------------------\n");
 }
 
-
-int main() {
+void printTable(float base_amount) {
     // Exchange rates from USD
     const float USD_EUR_RATE = 0.86;   // Euro
     const float USD_IND_RATE = 90.90;   // Indian Ruppee
@@ -40,12 +39,7 @@ int main() {
     const float USD_AUD_RATE = 1.49;   // Australian Dollar
     const float USD_CAD_RATE = 1.39;   // Canadian Dollar
     const float USD_CHF_RATE = 0.80;   // Swiss Franc
-
-    // Get base amount from user
-    float base_amount;
-    printf("Enter base amount: ");
-    scanf("%f", &base_amount);
-
+    
     // Calculate each conversion and print the table
 
     // Calculate conversions from USD
@@ -134,8 +128,33 @@ int main() {
 
     //Print row for CHF
     print_conversion_row("Swiss", dollars, eur, ind, jpy, aud, cad, chf);
-   
-    printf("---------------------------------------------------------------------------------------------------------------\n");
-    printf("\n");
+
+}
+
+
+int main() {
+    int notExit = 1;
+    char user_choice_continue;
+    do {
+       // Get base amount from user
+       float base_input;
+       printf("Enter base amount: ");
+       scanf("%f", &base_input);
+       printf("\n");
+
+       // Print conversion table
+       printTable(base_input);
+       printf("\n");
+
+       // Ask user if they want to continue or exit
+       printf("Would you like to convert another amount? (y/n): ");
+       scanf(" %c", &user_choice_continue);
+       if (user_choice_continue == 'n' || user_choice_continue == 'N') {
+           notExit = 0;
+       }
+       printf("\n");
+    } while (notExit);
+    
+
     return 0;
 }
